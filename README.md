@@ -1,23 +1,25 @@
 # vn-bizdoc
 
-An **agent skill** for producing professional **Vietnamese business documents** end-to-end — proposals (đề xuất), reports (báo cáo), submissions to leadership (tờ trình / tài liệu trình lãnh đạo):
+An **agent skill** for producing professional **Vietnamese business documents** end-to-end — proposals, reports, and submissions to leadership:
 
 **source-backed research → Word-ready HTML → export to DOCX / PDF (on demand).**
 
-Built and battle-tested on real leadership-facing proposals (pricing research across VN retailers, multi-round reviews, Word export troubleshooting).
+Built and battle-tested on real leadership-facing proposals (pricing research across Vietnamese retailers, multi-round reviews, Word export troubleshooting).
+
+[Vietnamese version](README.vi.md)
 
 ---
 
 ## What it does
 
 ### Phase A — Research & sourcing
-- Extracts the "facts requiring sources" list from the brief (prices, fees, platform policies, legal refs, build-vs-buy claims).
-- Prefers official sellers/pages (Apple, LG, Google, GitHub) and major VN retailers (CellphoneS, GearVN, FPT Shop, TGDD, TopZone, Hacom…), with capture rules for list price vs sale price, discontinued products, and date stamping.
+- Extracts the "facts requiring sources" list from the brief (prices, fees, platform policies, legal references, build-vs-buy claims).
+- Prefers official sources (Apple, LG, Google, GitHub) and major Vietnamese retailers (CellphoneS, GearVN, FPT Shop, TGDD, TopZone, Hacom…), with capture rules for list price vs sale price, discontinued products, and date stamping.
 - Numbered `[n]` citations used throughout; source lists live in appendices: **A — prices/devices/accounts**, **B — sources for key claims**.
 
 ### Phase B — Write & format (HTML is the master file)
 - Word-ready single-file HTML: A4 · 2 cm margins · Times New Roman 12pt · styled tables · `.note` / `.ref` / `.center` utilities.
-- Vietnamese typography rules (decimal comma, dd/mm/yyyy, "ngày công" effort unit, per-project banned-words list).
+- Vietnamese typography rules (decimal comma, dd/mm/yyyy dates, man-day effort unit, per-project banned-words list).
 - **Every URL is a clickable `<a href>`** — survives Word import as real hyperlinks.
 - Document skeleton with **version history + changelog**; multi-file sync (full version vs standalone presentation version); editing-round protocol.
 
@@ -33,8 +35,11 @@ Built and battle-tested on real leadership-facing proposals (pricing research ac
 ```
 vn-bizdoc/
 ├── SKILL.md                        # workflow + golden rules (agent entry point)
+├── README.md                       # this file (English)
+├── README.vi.md                    # Vietnamese README
+├── LICENSE                         # MIT
 ├── references/
-│   ├── research-sourcing.md        # Phase A: sourcing method, VN source shortlist, citation patterns
+│   ├── research-sourcing.md        # Phase A: sourcing method, source shortlist, citation patterns
 │   ├── format-word-html.md         # Phase B: CSS/typography rules, versioning, multi-file sync
 │   └── word-automation-notes.md    # Phase C: Word COM pitfalls, fallback pipeline, verification
 ├── scripts/
@@ -63,23 +68,21 @@ Restart the agent session so the skill gets discovered.
 
 ## Usage
 
-Ask the agent in plain Vietnamese, for example:
+Ask the agent to write a document, for example:
 
-```
-Dùng vn-bizdoc viết đề xuất mua thiết bị cho đội phát triển
-Dùng vn-bizdoc viết báo cáo gửi lãnh đạo về kế hoạch Q4
-```
+- "Use vn-bizdoc to write a device-purchase proposal for the development team."
+- "Use vn-bizdoc to prepare a quarterly report for leadership."
 
-The skill will research sources, write the styled HTML, and then ask: *"Xuất luôn .docx/.pdf hay để rà soát xong mới xuất?"*
+The skill researches sources, writes the styled HTML, and then asks: *"Export to .docx/.pdf now, or after review?"*
 
 Export manually at any time:
 
 ```powershell
 # DOCX (Word automation preferred; auto fallback when SaveAs hangs)
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts\export-docx.ps1 -Html "docs\De-xuat-X.html"
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\export-docx.ps1 -Html "docs\proposal.html"
 
 # PDF (headless Edge/Chrome; Word fallback)
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts\export-pdf.ps1 -Html "docs\De-xuat-X.html"
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\export-pdf.ps1 -Html "docs\proposal.html"
 ```
 
 Options: `-Out <path>` (default: same folder, new extension) · `-Mode saveas|flat` (DOCX path) · `-Mode edge|word` (PDF path) · `-SaveAsTimeoutSec N`.
@@ -89,7 +92,7 @@ Each export ends with verification output:
 ```
 Parity check -> links: html=16 docx=16 | tables: html=6 docx=6
 Validation passed: no errors found.
-DONE: docs\De-xuat-X.docx
+DONE: docs\proposal.docx
 ```
 
 ## Requirements
@@ -113,4 +116,4 @@ See [`references/word-automation-notes.md`](references/word-automation-notes.md)
 
 ## License
 
-No license file yet — if you plan to reuse or redistribute this skill, open an issue or add a license of your choice.
+MIT — see [LICENSE](LICENSE).
