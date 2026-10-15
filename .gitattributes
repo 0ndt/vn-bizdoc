@@ -1,0 +1,3 @@
+# Normalize all text files to LF in the repository and on checkout.
+# Overrides core.autocrlf so the skill behaves identically on Windows/macOS/Linux.
+* text=auto eol=lf
