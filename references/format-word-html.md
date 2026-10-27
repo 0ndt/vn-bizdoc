@@ -62,3 +62,12 @@ The single HTML file IS the source of truth. Word/PDF are generated from it. Nev
 - check HTML tag balance and UTF-8 BOM
 - recount links (`<a href=`) and tables to compare later with exported docx
 - keep the docinfo/changelog in sync with the exports you regenerate
+
+## 9. Tone & register (leadership-ready Vietnamese)
+
+- Use formal administrative Vietnamese (văn phong hành chính): impersonal, declarative, decision-oriented. Address the reader as "Ban lãnh đạo"; open proposals with "Kính trình ... xem xét, phê duyệt" and close with "kính đề nghị".
+- Preferred verbs: đề nghị, phê duyệt, bảo đảm, triển khai, thực hiện, ban hành. Avoid colloquialisms ("cần mua luôn", "khá là", "nhé") and machine-flavoured filler ("nhằm hướng tới việc", "một cách toàn diện", "đóng vai trò quan trọng trong việc").
+- No invented compounds, no word-by-word translation of English jargon. Keep the official term once with a Vietnamese gloss at first use - "gói phân phối đầy đủ (Full distribution)", "người đại diện tài khoản (Account Holder)" - then use the Vietnamese term. If no settled Vietnamese term exists, keep the English term in parentheses after a plain description.
+- Write bullets as full sentences; avoid templated "**Nhãn:** chi tiết" lists outside tables.
+- No em dashes and no tilde for approximations: write "khoảng 3,26 triệu đồng", not "~3,26 triệu".
+- When the user asks to "humanize" or flags the tone, run the `humanizer` skill's rules on the draft (no em dashes, no bold-lead lists, no summary-style conclusions, no invented terms).

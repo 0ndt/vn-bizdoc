@@ -22,6 +22,7 @@ Process proven on real leadership-facing proposals (pricing research, Word expor
 5. **Never leak document relationships** the user didn't ask for: a presentation doc must not say "bản ngắn gọn" or reference "bản đầy đủ"; each document stands alone.
 6. Respect the project's vocabulary decisions — e.g. effort unit is **"ngày công"** (never "người-tuần"/"người-tháng" unless asked); keep a per-project banned-words list and grep for it after every edit round.
 7. HTML is the source of truth. Edit HTML, then re-export; never edit the .docx directly.
+8. **Formal register for leadership documents:** formal administrative Vietnamese, no invented terms or literal translations of English jargon, no em dashes; apply the `humanizer` skill's rules when asked to humanize (see `references/format-word-html.md` §9).
 
 ## Workflow
 
