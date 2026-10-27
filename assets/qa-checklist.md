@@ -2,6 +2,8 @@
 
 ## Content & language
 - [ ] Every external figure has `[n]` citation + source in Phụ lục A/B; price closing line present ("Giá tra ngày …; cần kiểm tra lại khi mua.")
+- [ ] Citation placement audit: each `[n]` sits immediately after the exact sourced fragment, not at the end of a sentence that also carries internal estimates or analysis; vendor-specific claims cite only that vendor's source.
+- [ ] Citation numbering is contiguous and maps 1:1 to the reference list.
 - [ ] Totals = sum of parts (budgets, estimates, ngày công) — recompute after every edit
 - [ ] Version bumped + changelog row added for this round
 - [ ] Companion docs synced (same numbers/decisions; version refs updated)

@@ -8,6 +8,7 @@ The single HTML file IS the source of truth. Word/PDF are generated from it. Nev
 - Body: Times New Roman, 12pt, line-height 1.45; tables 10.5pt; `.note` 10–10.5pt italic.
 - h1 17pt centered; h2 14pt with bottom border; h3 12.5pt; h4 12pt.
 - Utility classes: `.center` (numbers/short cells), `.note` (footnotes/disclaimers), `.ref` (source column in price tables), `.docinfo` (info table), `a { color:#1155cc }`.
+- List indentation: set indentation with `padding-left` on `ul/ol` (16-18px), never `margin-left`. Word maps a left margin to paragraph indentation on top of the built-in bullet indent, which renders bullets far too deep in the .docx; with margin 0 Word applies its own default (~0.6cm).
 - UTF-8 **with BOM**. If the editor tool doesn't add BOM, fix with:
   `$t=[IO.File]::ReadAllText($p); [IO.File]::WriteAllText($p,$t,(New-Object Text.UTF8Encoding($true)))`
 
