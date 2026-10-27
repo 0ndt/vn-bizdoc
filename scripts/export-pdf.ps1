@@ -6,10 +6,21 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 
+function Test-FileLocked([string]$Path) {
+  if (-not (Test-Path $Path)) { return $false }
+  try { $fs = [System.IO.File]::Open($Path, 'Open', 'ReadWrite', 'None'); $fs.Close(); return $false }
+  catch { return $true }
+}
+
 $HtmlPath = (Resolve-Path -LiteralPath $Html).Path
 if (-not $Out) { $Out = [System.IO.Path]::ChangeExtension($HtmlPath, '.pdf') }
 $OutPath = [System.IO.Path]::GetFullPath($Out)
+
+if (Test-FileLocked $OutPath) {
+  throw ("Output file is open in another application (PDF viewer?). Close it and re-run: " + $OutPath)
+}
 Remove-Item $OutPath -Force -ErrorAction SilentlyContinue
+$start = Get-Date.AddSeconds(-2)
 $url = ([uri]$HtmlPath).AbsoluteUri
 
 $browser = @(
@@ -24,13 +35,13 @@ if (($Mode -eq 'auto' -or $Mode -eq 'edge') -and $browser) {
   foreach ($headlessFlag in @('--headless=new','--headless')) {
     $argsList = @($headlessFlag,'--disable-gpu','--no-pdf-header-footer',('--print-to-pdf="' + $OutPath + '"'),('"' + $url + '"'))
     Start-Process -FilePath $browser -ArgumentList $argsList -Wait -NoNewWindow
-    if (Test-Path $OutPath) { break }
+    if ((Test-Path $OutPath) -and ((Get-Item $OutPath).LastWriteTime -ge $start)) { break }
   }
-  if (Test-Path $OutPath) {
+  if ((Test-Path $OutPath) -and ((Get-Item $OutPath).LastWriteTime -ge $start)) {
     Write-Output ('OK -> ' + $OutPath + ' (' + (Get-Item $OutPath).Length + ' bytes)')
     return
   }
-  if ($Mode -eq 'edge') { throw 'Headless browser produced no PDF' }
+  if ($Mode -eq 'edge') { throw 'Headless browser produced no fresh PDF' }
   Write-Output 'Headless browser failed - falling back to Word export'
 }
 

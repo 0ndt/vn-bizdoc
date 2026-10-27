@@ -29,6 +29,8 @@ The orchestrator automates this: it runs attempt 1 as a background worker with a
   (Word recreates it automatically.)
 - **SaveAs2 deadlock symptom**: hangs forever with NO dialog window (verify with a user32 EnumWindows dump), independent of destination folder (even a trivial new doc saved to %TEMP% hangs). This is a machine/Word-profile problem — do not keep retrying; fall back to WordOpenXML.
 - **officecli resident** keeps files open (causing "file is being used by another process" in other tools). Run `officecli close <file>` before external readers.
+- **Output file open in Word/PDF viewer:** Word's SaveAs fails with "Word cannot save this file because it is already open elsewhere", and the flat-OPC packer cannot overwrite a locked file. Both export scripts now pre-check the target with an exclusive-open probe and abort with a clear message. Route: ask the user to close the file, then re-run.
+- **Fallback trigger:** run the Flat OPC fallback whenever the SaveAs attempt did not succeed (track an `$attempt1Done` flag). Never key the fallback off `Test-Path $OutPath` - a stale output from an earlier run makes that test true and silently skips the fallback.
 - Word AddIns/COMAddIns are usually NOT the cause (verified) — don't disable them.
 - Cleaning a hang: `Stop-Process` the automation PIDs, sweep, then proceed. All Word work must be wrapped in try/finally that quits Word.
 
