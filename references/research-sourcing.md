@@ -53,3 +53,4 @@ Example appendix line (Vietnamese, keep format):
 - Aggregator "cheapest" numbers may come from grey-market sellers; verify the retailer is authorized (chính hãng).
 - Discontinued-but-still-listed products: check the manufacturer page for "Discontinued" banners before proposing them.
 - When a product doesn't exist in a size/type the user wants (e.g. 24" 4K còn bán), say so explicitly in the document and offer the nearest real option — never invent a listing.
+- D-U-N-S in Vietnam: lookup and registration go through **CRIF D&B Vietnam** (https://www.crifvietnam.com/), the exclusive Dun & Bradstreet partner in Vietnam; the global dnb.com flow routes to this partner. It is free - beware paid intermediaries.
