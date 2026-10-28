@@ -20,7 +20,7 @@ if (Test-FileLocked $OutPath) {
   throw ("Output file is open in another application (PDF viewer?). Close it and re-run: " + $OutPath)
 }
 Remove-Item $OutPath -Force -ErrorAction SilentlyContinue
-$start = Get-Date.AddSeconds(-2)
+$start = (Get-Date).AddSeconds(-2)
 $url = ([uri]$HtmlPath).AbsoluteUri
 
 $browser = @(
